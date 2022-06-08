@@ -36,10 +36,23 @@ public class BonusServiceTest {
     @org.junit.jupiter.api.Test
     void shouldCalculateForNoRegisteredAndUnderLimit() {
         BonusService service = new BonusService();
-
+         // пользоваель не зарегистрирован
         long amount = 1000;
         boolean registered = false;
-        long expected = 30;
+        long expected = 10;
+
+        long actual = service.calculate(amount, registered);
+
+        assertEquals(expected, actual);
+    }
+    @org.junit.jupiter.api.Test
+    void shouldCalculateForNoRegisteredAndOverLimit() {
+        BonusService service = new BonusService();
+        // пользоваель не зарегистрирован
+        // бонусы больше лимита 500
+        long amount = 1_000_000;
+        boolean registered = false;
+        long expected = 500;
 
         long actual = service.calculate(amount, registered);
 
